@@ -78,8 +78,7 @@ def main(args):
     # Get all the Java projects on GitHub
     slugs = []
     url = 'https://api.github.com/search/repositories?q=language:java&sort=stars&order=desc&per_page=100'
-    #for i in range(1, 36):
-    for i in range(1, 2):
+    for i in range(1, 36):
         suffix = '&page=' + str(i)
         request = url + suffix
         response = requests.get(request, auth=(uname, passwd))
