@@ -52,7 +52,7 @@ def filter_for_travis_projects(maven_projects):
                 data = json.loads(response.text, encoding = 'utf-8')
             except ValueError:
                 # Something went wrong, Travis returns some weird image of sorts, so skip
-                print 'TRAVIS FILTER VALUE ERROR FOR ' + project
+                print('TRAVIS FILTER VALUE ERROR FOR ' + project)
                 continue
             if data['active']:
                 travis_projects.append(project)
@@ -89,19 +89,19 @@ def main(args):
         else:
             break
 
-    print 'ALL PROJECTS:', len(slugs)
+    print('ALL PROJECTS:', len(slugs))
 
     # Check if the project is a Maven project by merely checking if a link to the pom.xml can be accessed
     maven_projects = filter_for_maven_projects(slugs)
-    print 'MAVEN PROJECTS:', len(maven_projects)
+    print('MAVEN PROJECTS:', len(maven_projects))
 
     # Check if the Maven projects are on Travis, by hitting the Travis API and checking that it's active
     travis_projects = filter_for_travis_projects(maven_projects)
-    print 'TRAVIS PROJECTS:', len(travis_projects)
+    print('TRAVIS PROJECTS:', len(travis_projects))
 
     # For each such project, check if it's multi-module by checking it out and counting that it has more than one pom.xml
     multimodule_projects = filter_for_multimodule_projects(travis_projects)
-    print 'MULTIMODULE PROJECTS', len(multimodule_projects)
+    print('MULTIMODULE PROJECTS', len(multimodule_projects))
 
     # Print out final filtered list of projects (the slugs)
     with open(out_file, 'w') as out:
